@@ -1,5 +1,7 @@
 const pkg = require('./package')
 
+require('dotenv').config()
+
 module.exports = {
   mode: 'universal',
 
@@ -21,6 +23,10 @@ module.exports = {
   */
   loading: { color: '#FFFFFF' },
 
+  env: {
+    SUZURI_API_KEY: process.env.SUZURI_API_KEY,
+  },
+
   /*
   ** Global CSS
   */
@@ -31,12 +37,9 @@ module.exports = {
   */
   plugins: [],
 
-  /*
-  ** Nuxt.js modules
-  */
   modules: [
-    // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
   ],
   /*
   ** Axios module configuration

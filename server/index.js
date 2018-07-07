@@ -1,4 +1,5 @@
 const express = require('express')
+const proxy = require('express-http-proxy')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
@@ -19,6 +20,15 @@ async function start() {
     const builder = new Builder(nuxt)
     await builder.build()
   }
+
+  app.use('/api', proxy('suzuri.jp', {
+    https: true,
+    proxyReqPathResolver: (req) => `/api${req.url}`,
+    proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+      proxyReqOpts.headers['Authorization'] = `Bearer ${process.env.SUZURI_API_KEY}`
+      return proxyReqOpts
+    },
+  }))
 
   // Give nuxt middleware to express
   app.use(nuxt.render)
