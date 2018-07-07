@@ -21,6 +21,10 @@ module.exports = {
   */
   loading: { color: '#FFFFFF' },
 
+  env: {
+    SUZURI_API_KEY: process.env.SUZURI_API_KEY,
+  },
+
   /*
   ** Global CSS
   */

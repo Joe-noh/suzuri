@@ -18,10 +18,15 @@
 
 <script>
 import Logo from '~/components/Logo.vue'
+import axios from 'axios'
 
 export default {
   components: {
     Logo,
+  },
+  async mounted () {
+    const res = await axios.get('/api/v1/activities?hoge=fuga')
+    console.log(res)
   },
 }
 </script>
