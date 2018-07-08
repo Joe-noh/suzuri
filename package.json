@@ -9,11 +9,12 @@
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production node server/index.js",
     "generate": "nuxt generate",
-    "lint": "prettier --write ./**/*.{js,vue}"
+    "lint": "prettier --write ./**/*.{js,scss,vue}"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.0.0",
     "@nuxtjs/dotenv": "^1.1.1",
+    "@nuxtjs/font-awesome": "^1.0.3",
     "express": "^4.15.3",
     "express-http-proxy": "^1.2.0",
     "nuxt": "^1.0.0"
@@ -21,7 +22,9 @@
   "devDependencies": {
     "babel-eslint": "^8.2.5",
     "cross-env": "^5.0.1",
+    "node-sass": "^4.9.1",
     "nodemon": "^1.11.0",
-    "prettier": "^1.13.7"
+    "prettier": "^1.13.7",
+    "sass-loader": "^7.0.3"
   }
 }
