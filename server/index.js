@@ -21,14 +21,17 @@ async function start() {
     await builder.build()
   }
 
-  app.use('/api', proxy('suzuri.jp', {
-    https: true,
-    proxyReqPathResolver: (req) => `/api${req.url}`,
-    proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
-      proxyReqOpts.headers['Authorization'] = `Bearer ${process.env.SUZURI_API_KEY}`
-      return proxyReqOpts
-    },
-  }))
+  app.use(
+    '/api',
+    proxy('suzuri.jp', {
+      https: true,
+      proxyReqPathResolver: req => `/api${req.url}`,
+      proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+        proxyReqOpts.headers['Authorization'] = `Bearer ${process.env.SUZURI_API_KEY}`
+        return proxyReqOpts
+      },
+    }),
+  )
 
   // Give nuxt middleware to express
   app.use(nuxt.render)
