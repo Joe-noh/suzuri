@@ -24,14 +24,14 @@ export default {
   components: {
     Logo,
   },
-  async mounted () {
+  async mounted() {
     const res = await axios.get('/api/v1/activities?hoge=fuga')
     console.log(res)
   },
 }
 </script>
 
-<style>
+<style lang="scss">
 .container {
   min-height: 100vh;
   display: flex;
@@ -41,7 +41,7 @@ export default {
 }
 .title {
   font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif; /* 1 */
+    'Helvetica Neue', Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
