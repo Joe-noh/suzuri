@@ -1,8 +1,19 @@
 <template>
   <div>
+    <s-global-header/>
     <nuxt/>
   </div>
 </template>
+
+<script>
+import SGlobalHeader from '~/components/organisms/SGlobalHeader.vue'
+
+export default {
+  components: {
+    SGlobalHeader,
+  },
+}
+</script>
 
 <style>
 html {
