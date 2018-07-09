@@ -11,7 +11,7 @@ import SFeatureList from '~/components/organisms/SFeatureList.vue'
 import SPickupList from '~/components/organisms/SPickupList.vue'
 import SNewProductList from '~/components/organisms/SNewProductList.vue'
 
-import axios from 'axios'
+import { fetchFeatures, fetchPickups, fetchNewProducts } from '~/lib/suzuri'
 
 export default {
   components: {
@@ -21,38 +21,19 @@ export default {
   },
   data () {
     return {
-      features: [],
-      pickups: [],
       newProducts: [],
     }
   },
-  async mounted() {
-    this.features = await this.fetchFeatures()
-    this.pickups = await this.fetchPickups()
-    this.newProducts = await this.fetchNewProducts()
+  async asyncData(context) {
+    const results = await Promise.all([fetchFeatures(), fetchPickups()])
 
-    console.log(this.features)
-    console.log(this.pickups)
-    console.log(this.newProducts)
+    return {
+      features: results[0],
+      pickups: results[1],
+    }
   },
-  methods: {
-    async fetchFeatures() {
-      const params = { userName: 'surisurikun', limit: 4 }
-      const res = await axios.get('/api/v1/choices', { params })
-
-      return res.data.choices
-    },
-    async fetchPickups() {
-      const res = await axios.get('/api/v1/users/7/favorites')
-      const pickups = res.data.favorites.map(fav => fav.product)
-
-      return pickups
-    },
-    async fetchNewProducts() {
-      const res = await axios.get('/api/v1/products')
-
-      return res.data.products
-    },
+  async mounted() {
+    this.newProducts = await fetchNewProducts()
   },
 }
 </script>
