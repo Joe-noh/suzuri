@@ -1,28 +1,22 @@
 <template>
   <nav class="s-global-navigator">
     <ul class="list">
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 't-shirt' }}">Tシャツ</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'ringer-t-shirt' }}">リンガーTシャツ</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'long-sleeve-t-shirt' }}">ロングスリーブTシャツ</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'full-graphic-t-shirt' }}">フルグラフィックTシャツ</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'sweat' }}">スウェット</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'hoodie' }}">フーディ</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'mug' }}">マグカップ</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'towel-handkerchief' }}">タオルハンカチ</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'blanket' }}">ブランケット</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'sticker' }}">ステッカー</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'can-badge' }}">缶バッジ</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'note' }}">ノート</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'smartphone-case' }}">スマートフォンケース</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'clear-smartphone-case' }}">クリアスマートフォンケース</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'wallet-phone-case' }}">ウォレットフォンケース</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'tote-bag' }}">トートバッグ</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'sacoche' }}">サコッシュ</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'baby-bib' }}">ベイビービブ</router-link></li>
-      <li class="list-item"><router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: 'baby-rompers' }}">ベイビーロンパース</router-link></li>
+      <li v-for="item in items" class="list-item">
+        <router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: item.name }}">{{ item.humanizeName }}</router-link>
+      </li>
     </ul>
   </nav>
 </template>
+
+<script>
+import items from '~/lib/item-master'
+
+export default {
+  data() {
+    return { items }
+  },
+}
+</script>
 
 <style lang="scss" scoped>
 @import '~assets/stylesheets/mixins/variables';
