@@ -1,8 +1,22 @@
 <template>
   <div>
+    <s-global-header/>
+    <s-global-navigator/>
     <nuxt/>
   </div>
 </template>
+
+<script>
+import SGlobalHeader from '~/components/organisms/SGlobalHeader.vue'
+import SGlobalNavigator from '~/components/organisms/SGlobalNavigator.vue'
+
+export default {
+  components: {
+    SGlobalHeader,
+    SGlobalNavigator,
+  },
+}
+</script>
 
 <style>
 html {
