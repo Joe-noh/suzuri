@@ -1,15 +1,19 @@
 <template>
   <div class="s-pickup-list">
-    <div v-for="pickup in pickups">
-      {{ pickup.title }}
-    </div>
+    <h2>ピックアップ</h2>
+    <s-product-list :products="products"/>
   </div>
 </template>
 
 <script>
+import SProductList from '~/components/molecules/SProductList.vue'
+
 export default {
+  components: {
+    SProductList,
+  },
   props: {
-    pickups: {
+    products: {
       type: Array,
       required: true,
     },
