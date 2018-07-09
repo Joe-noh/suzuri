@@ -41,6 +41,7 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
+    '@nuxtjs/router',
     '@nuxtjs/font-awesome',
   ],
   /*
