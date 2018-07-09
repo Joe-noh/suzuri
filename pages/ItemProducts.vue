@@ -26,9 +26,15 @@ const items = {
 }
 
 export default {
+  props: {
+    itemName: {
+      type: String,
+      required: true,
+    },
+  },
   computed: {
     itemId() {
-      return items[this.$route.params.itemName]
+      return items[this.itemName]
     }
   }
 }

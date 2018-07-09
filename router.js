@@ -11,7 +11,7 @@ export function createRouter() {
     mode: 'history',
     routes: [
       {path: '/', name: 'top', component: Top},
-      {path: '/items/:itemName', name: 'item-products', component: ItemProducts},
+      {path: '/items/:itemName', name: 'item-products', component: ItemProducts, props: true},
     ]
   })
 }
