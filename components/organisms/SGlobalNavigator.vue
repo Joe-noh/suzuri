@@ -2,7 +2,7 @@
   <nav class="s-global-navigator">
     <ul class="list">
       <li v-for="item in items" class="list-item">
-        <router-link class="list-item__link" :to="{name: 'item-products', params: { itemName: item.name }}">{{ item.humanizeName }}</router-link>
+        <a class="list-item__link" :href="`/items/${item.name}`">{{ item.humanizeName }}</a>
       </li>
     </ul>
   </nav>
