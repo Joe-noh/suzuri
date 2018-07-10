@@ -1,0 +1,17 @@
+@mixin font-size($size) {
+  @if $size == tiny {
+    font-size: 10px;
+  } @else if $size == small {
+    font-size: 12px;
+  } @else if $size == normal {
+    font-size: 14px;
+  } @else if $size == large {
+    font-size: 18px;
+  }
+}
+
+@mixin overflow-elipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
