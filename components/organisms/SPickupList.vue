@@ -1,16 +1,15 @@
 <template>
   <div class="s-pickup-list">
-    <h2>ピックアップ</h2>
-    <s-product-list :products="products"/>
+    <s-titled-product-list title="ピックアップ" :products="products"/>
   </div>
 </template>
 
 <script>
-import SProductList from '~/components/molecules/SProductList.vue'
+import STitledProductList from '~/components/molecules/STitledProductList.vue'
 
 export default {
   components: {
-    SProductList,
+    STitledProductList,
   },
   props: {
     products: {
@@ -20,6 +19,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-</style>
