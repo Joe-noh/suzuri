@@ -15,3 +15,12 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+@mixin link-color($color) {
+  color: $color;
+  text-decoration: none;
+
+  &:hover, &:visited, &:active {
+    color: $color;
+  }
+}

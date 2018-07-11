@@ -20,6 +20,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~assets/stylesheets/mixins/variables';
+@import '~assets/stylesheets/mixins/fonts';
 
 .s-global-navigator {
   height: 40px;
@@ -34,18 +35,19 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   overflow-x: scroll;
-  padding: 0 5px;
+  padding: 0;
 }
 
 .list-item {
   line-height: 40px;
-  display: table-cell;
   white-space: nowrap;
-  margin: 0 5px;
+  margin: 0 7px;
 }
 
 .list-item__link {
-  text-decoration: none;
+  @include link-color($black);
+
+  font-weight: bold;
   font-size: 14px;
 }
 </style>
