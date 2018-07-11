@@ -45,12 +45,29 @@ module.exports = {
     '@nuxtjs/dotenv',
     '@nuxtjs/router',
     '@nuxtjs/font-awesome',
+    '@nuxtjs/pwa',
   ],
   /*
   ** Axios module configuration
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+  },
+
+  manifest: {
+    name: "SUZURI Lite",
+    lang: 'ja'
+  },
+
+  workbox: {
+    dev: true,
+    runtimeCaching: [
+      {
+        urlPattern: 'https://d1q9av5b648rmv.cloudfront.net/.*',
+        handler: 'cacheFirst',
+        method: 'GET',
+      }
+    ],
   },
 
   /*
