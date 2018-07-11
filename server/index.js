@@ -1,3 +1,6 @@
+const fs = require('fs')
+const path = require('path')
+const https = require('https')
 const express = require('express')
 const proxy = require('express-http-proxy')
 const { Nuxt, Builder } = require('nuxt')
@@ -36,8 +39,12 @@ async function start() {
   // Give nuxt middleware to express
   app.use(nuxt.render)
 
+  const options = {
+    key: fs.readFileSync(path.resolve(__dirname, './localhost-key.pem')),
+    cert: fs.readFileSync(path.resolve(__dirname, './localhost.pem'))
+  }
   // Listen the server
-  app.listen(port, host)
-  console.log('Server listening on http://' + host + ':' + port) // eslint-disable-line no-console
+  https.createServer(options, app).listen(port, host)
+  console.log('Server listening on https://' + host + ':' + port)
 }
 start()
