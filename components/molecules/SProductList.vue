@@ -1,15 +1,17 @@
 <template>
   <div class="s-product-list">
     <div class="product" v-for="product in products">
-      <div class="product__sample">
+      <a class="product__sample" :href="product.sampleUrl" target="_blank">
         <img class="product__sample__image" :src="product.sampleImageUrl">
-      </div>
-      <span class="product__title">{{ product.material.title }}</span>
+      </a>
+      <a class="product__title" :href="product.sampleUrl" target="_blank">
+        <span>{{ product.material.title }}</span>
+      </a>
       <span class="product__price">&yen;{{ product.sampleItemVariant.price + product.material.price | comma }}</span>
-      <div class="product__user">
+      <a class="product__user" :href="userShopUrl(product.sampleUrl)">
         <img class="product__user__avatar" :src="product.material.user.avatarUrl">
         <span class="product__user__name">{{ product.material.user.name }}</span>
-      </div>
+      </a>
     </div>
   </div>
 </template>
@@ -22,6 +24,14 @@ export default {
       required: true,
     },
   },
+  methods: {
+    userShopUrl(sampleUrl) {
+      const regexp = new RegExp('(https://suzuri.jp/.+?)/')
+      const match = sampleUrl.match(regexp)
+
+      return match[0]
+    }
+  }
 }
 </script>
 
@@ -44,6 +54,7 @@ export default {
 
 .product__sample {
   background-color: $graylight;
+  display: block;
   width: 100%;
   padding-top: 100%;
   position: relative;
@@ -61,6 +72,7 @@ export default {
 
 .product__title {
   @include font-size(normal);
+  @include link-color($black);
   @include overflow-elipsis;
 
   font-weight: bold;
@@ -83,6 +95,7 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
+  text-decoration: none;
 }
 
 .product__user__avatar {
@@ -93,6 +106,7 @@ export default {
 
 .product__user__name {
   @include font-size(normal);
+  @include link-color($black);
   @include overflow-elipsis;
 
   margin-left: 5px;
