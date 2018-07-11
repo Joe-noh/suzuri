@@ -1,25 +1,29 @@
 <template lang="html">
-  <div>{{ itemId }}</div>
+  <s-product-list :products="products"/>
 </template>
 
 <script>
-import items from '~/lib/item-master'
+import SProductList from '~/components/molecules/SProductList.vue'
+
+import { fetchItemProducts } from '~/lib/suzuri'
 
 export default {
+  components: {
+    SProductList,
+  },
   props: {
     itemName: {
       type: String,
       required: true,
     },
   },
-  computed: {
-    itemId() {
-      const item = items.find(item => item.name === this.itemName)
-      return item.id
-    }
+  async asyncData({ params }) {
+    const products = await fetchItemProducts(params.itemName)
+
+    return { products }
   }
 }
 </script>
 
-<style lang="css">
+<style lang="scss" scoped>
 </style>
