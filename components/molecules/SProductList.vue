@@ -1,7 +1,9 @@
 <template>
   <div class="s-product-list">
     <div class="product" v-for="product in products">
-      <img class="product__image" :src="product.sampleImageUrl">
+      <div class="product__sample">
+        <img class="product__sample__image" :src="product.sampleImageUrl">
+      </div>
       <span class="product__title">{{ product.material.title }}</span>
       <span class="product__price">&yen;{{ product.sampleItemVariant.price + product.material.price | comma }}</span>
       <div class="product__user">
@@ -40,7 +42,19 @@ export default {
   font-size: 0;
 }
 
-.product__image {
+.product__sample {
+  background-color: $graylight;
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+}
+
+.product__sample__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
   height: auto;
 }

@@ -18,16 +18,19 @@ export default {
       required: true,
     },
   },
+  data () {
+    return {
+      products: [],
+    }
+  },
   computed: {
     humanizeName() {
       const item = items.find(item => item.name === this.itemName)
       return item.humanizeName
     },
   },
-  async asyncData({ params }) {
-    const products = await fetchItemProducts(params.itemName)
-
-    return { products }
+  async mounted() {
+    this.products = await fetchItemProducts(this.itemName)
   },
 }
 </script>
