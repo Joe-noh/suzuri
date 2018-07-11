@@ -1,11 +1,17 @@
 <template lang="html">
-  <div>{{ itemId }}</div>
+  <s-titled-product-list class="titled-product-list" :title="humanizeName" :products="products"/>
 </template>
 
 <script>
+import STitledProductList from '~/components/molecules/STitledProductList.vue'
+
 import items from '~/lib/item-master'
+import { fetchItemProducts } from '~/lib/suzuri'
 
 export default {
+  components: {
+    STitledProductList,
+  },
   props: {
     itemName: {
       type: String,
@@ -13,13 +19,21 @@ export default {
     },
   },
   computed: {
-    itemId() {
+    humanizeName() {
       const item = items.find(item => item.name === this.itemName)
-      return item.id
-    }
-  }
+      return item.humanizeName
+    },
+  },
+  async asyncData({ params }) {
+    const products = await fetchItemProducts(params.itemName)
+
+    return { products }
+  },
 }
 </script>
 
-<style lang="css">
+<style lang="scss" scoped>
+.titled-product-list {
+  padding: 10px 0;
+}
 </style>

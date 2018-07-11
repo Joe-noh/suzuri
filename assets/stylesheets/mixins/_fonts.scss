@@ -7,6 +7,8 @@
     font-size: 14px;
   } @else if $size == large {
     font-size: 18px;
+  } @else if $size == huge {
+    font-size: 24px;
   }
 }
 
@@ -14,4 +16,13 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+@mixin link-color($color) {
+  color: $color;
+  text-decoration: none;
+
+  &:hover, &:visited, &:active {
+    color: $color;
+  }
 }
