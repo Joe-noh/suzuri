@@ -24,7 +24,8 @@ export default {
 .s-product-list {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
+  padding: 0 5px;
 }
 </style>

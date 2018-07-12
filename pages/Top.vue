@@ -39,7 +39,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  padding: 0 10px;
-}
+.container {}
 </style>

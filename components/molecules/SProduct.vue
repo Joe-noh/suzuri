@@ -38,8 +38,9 @@ export default {
 @import "~assets/stylesheets/mixins/variables";
 
 .product {
-  width: calc(50% - 5px);
-  margin-bottom: 15px;
+  width: calc(50% - 10px);
+  max-width: 323px;
+  margin: 0 5px 15px 5px;
   font-size: 0;
 }
 
