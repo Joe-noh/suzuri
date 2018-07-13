@@ -60,7 +60,7 @@ module.exports = {
   },
 
   workbox: {
-    dev: true,
+    dev: false,
     runtimeCaching: [
       {
         urlPattern: 'https://d1q9av5b648rmv.cloudfront.net/.*',
