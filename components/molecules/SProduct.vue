@@ -1,9 +1,9 @@
 <template>
   <div class="product">
-    <a class="product__sample" :href="product.sampleUrl" target="_blank">
+    <a class="product__sample" :href="productUrl">
       <img class="product__sample__image" :src="product.sampleImageUrl">
     </a>
-    <a class="product__title" :href="product.sampleUrl" target="_blank">
+    <a class="product__title" :href="productUrl">
       <span>{{ product.material.title }}</span>
     </a>
     <span class="product__price">&yen;{{ product.sampleItemVariant.price + product.material.price | comma }}</span>
@@ -21,6 +21,11 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  computed: {
+    productUrl() {
+      return `/${this.product.material.user.name}/${this.product.id}`
+    }
   },
   methods: {
     userShopUrl(sampleUrl) {
