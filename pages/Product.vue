@@ -21,6 +21,18 @@ export default {
       type: String,
       required: true,
     },
+    itemName: {
+      type: String,
+      required: true,
+    },
+    itemSize: {
+      type: String,
+      required: true,
+    },
+    itemColor: {
+      type: String,
+      required: true,
+    },
   },
   async asyncData({ params }) {
     const product = await fetchProduct(params.itemId)

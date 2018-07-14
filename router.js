@@ -13,7 +13,7 @@ export function createRouter() {
     routes: [
       {path: '/', name: 'top', component: Top},
       {path: '/items/:itemName', name: 'item-products', component: ItemProducts, props: true},
-      {path: '/:userName/:itemId', name: 'product', component: Product, props: true},
+      {path: '/:userName/:itemId/:itemName/:itemSize/:itemColor', name: 'product', component: Product, props: true},
     ]
   })
 }

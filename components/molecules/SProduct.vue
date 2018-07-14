@@ -24,7 +24,14 @@ export default {
   },
   computed: {
     productUrl() {
-      return `/${this.product.material.user.name}/${this.product.id}`
+      return [
+        '',
+        this.product.material.user.name,
+        this.product.id,
+        this.product.item.name,
+        this.product.sampleItemVariant.size.name,
+        this.product.sampleItemVariant.color.name,
+      ].join('/')
     }
   },
   methods: {
