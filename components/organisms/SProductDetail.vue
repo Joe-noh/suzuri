@@ -3,15 +3,21 @@
     <div class="product-sample">
       <img class="product-sample__image" :src="imageUrl" alt="">
     </div>
-    <h2 class="product__title">{{ product.material.title }}</h2>
-    <span class="product__price">&yen;{{ product.sampleItemVariant.price + product.material.price | comma }}（税抜）</span>
-    <div class="product__color">
-      <span class="product__color__heading">カラーを選択</span>
-      <s-color-picker :colors="productColors" :color-name="itemColor" @change="onColorChange"/>
+    <div class="product-section">
+      <h2 class="product__title">{{ product.material.title }}</h2>
+      <span class="product__price">&yen;{{ product.sampleItemVariant.price + product.material.price | comma }}（税抜）</span>
     </div>
-    <div class="product__size">
-      <span class="product__size__heading">サイズを選択</span>
-      <s-size-selector  class="product__size__selector" :sizes="productSizes" :size-name="itemSize" @change="onSizeChange"/>
+    <div class="product-section">
+      <span class="product-section__heading">カラーを選択</span>
+      <s-color-picker class="product-section__content" :colors="productColors" :color-name="itemColor" @change="onColorChange"/>
+    </div>
+    <div class="product-section">
+      <span class="product-section__heading">サイズを選択</span>
+      <s-size-selector class="product-section__content" :sizes="productSizes" :size-name="itemSize" @change="onSizeChange"/>
+    </div>
+    <div class="product-section">
+      <span class="product-section__heading">このアイテムについて</span>
+      <p class="product-section__content">{{ product.material.description }}</p>
     </div>
   </div>
 </template>
@@ -109,34 +115,29 @@ export default {
   @include overflow-elipsis;
 
   color: $black;
-  margin: 5px 0 0 5px;
-  padding: 0;
 }
 
 .product__price {
   @include font-size(normal);
 
   color: $gray;
-  margin: 4px 0 0 8px;
+  margin-left: 3px;
 }
 
-.product__color {
-  margin: 10px 5px 0 5px;
+.product-section {
+  margin: 10px;
 }
 
-.product__color__heading {
+.product-section__heading {
   @include font-size(normal);
+
+  color: $gray;
+  font-weight: bold;
 }
 
-.product__size {
-  margin: 10px 5px 0 5px;
-}
-
-.product__size__heading {
+.product-section__content {
   @include font-size(normal);
-}
 
-.product__size__selector {
-  margin-top: 3px;
+  margin-top: 5px;
 }
 </style>
