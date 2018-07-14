@@ -1,8 +1,8 @@
 <template>
   <section class="container">
-    <s-feature-list :choices="features"/>
-    <s-pickup-list :products="pickups"/>
-    <s-new-product-list :products="newProducts"/>
+    <s-feature-list class="feature-list" :choices="features"/>
+    <s-pickup-list class="pickup-list" :products="pickups"/>
+    <s-new-product-list class="new-product-list" :products="newProducts"/>
   </section>
 </template>
 
@@ -40,4 +40,16 @@ export default {
 
 <style lang="scss" scoped>
 .container {}
+
+.feature-list {
+  margin-top: 20px;
+}
+
+.pickup-list {
+  margin-top: 30px;
+}
+
+.new-product-list {
+  margin-top: 30px;
+}
 </style>
