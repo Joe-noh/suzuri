@@ -7,11 +7,11 @@
       <h2 class="product__title">{{ product.material.title }}</h2>
       <span class="product__price">&yen;{{ product.sampleItemVariant.price + product.material.price | comma }}（税抜）</span>
     </div>
-    <div class="product-section">
+    <div class="product-section" v-if="productColors.length > 1">
       <span class="product-section__heading">カラーを選択</span>
       <s-color-picker class="product-section__content" :colors="productColors" :color-name="itemColor" @change="onColorChange"/>
     </div>
-    <div class="product-section">
+    <div class="product-section" v-if="productSizes.length > 1">
       <span class="product-section__heading">サイズを選択</span>
       <s-size-selector class="product-section__content" :sizes="productSizes" :size-name="itemSize" @change="onSizeChange"/>
     </div>
