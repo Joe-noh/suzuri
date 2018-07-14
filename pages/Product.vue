@@ -1,16 +1,16 @@
 <template lang="html">
-  <s-product :product="product"/>
+  <s-product-detail :product="product" :item-size="itemSize" :item-color="itemColor"/>
 </template>
 
 <script>
-import SProduct from '~/components/molecules/SProduct.vue'
+import SProductDetail from '~/components/organisms/SProductDetail.vue'
 
 import items from '~/lib/item-master'
 import { fetchProduct } from '~/lib/suzuri'
 
 export default {
   components: {
-    SProduct,
+    SProductDetail,
   },
   props: {
     userName: {
