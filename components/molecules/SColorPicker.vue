@@ -3,7 +3,7 @@
     <a class="s-color-picker__color"
       :class="{'s-color-picker__color--selected': color.name == colorName}"
       :style="{backgroundColor: color.rgb}"
-      @click="emitChange(color)"
+      @click.prevent="emitChange(color)"
       href="#"
       v-for="color in colors" :key="color.id"></a>
   </div>
