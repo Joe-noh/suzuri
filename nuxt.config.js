@@ -5,37 +5,24 @@ require('dotenv').config()
 module.exports = {
   mode: 'universal',
 
-  /*
-  ** Headers of the page
-  */
   head: {
-    title: pkg.name,
+    title: 'SUZURI Lite',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description },
+      { hid: 'description', name: 'description', content: 'Cache and Cache.' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#FFFFFF' },
+  loading: false,
 
   env: {
     SUZURI_API_KEY: process.env.SUZURI_API_KEY,
     BASE_URL: process.env.BASE_URL,
   },
 
-  /*
-  ** Global CSS
-  */
   css: [],
 
-  /*
-  ** Plugins to load before mounting the App
-  */
   plugins: [
     '~plugins/filters.js',
   ],
@@ -47,12 +34,8 @@ module.exports = {
     '@nuxtjs/font-awesome',
     '@nuxtjs/pwa',
   ],
-  /*
-  ** Axios module configuration
-  */
-  axios: {
-    // See https://github.com/nuxt-community/axios-module#options
-  },
+
+  axios: {},
 
   manifest: {
     name: "SUZURI Lite",
@@ -70,8 +53,5 @@ module.exports = {
     ],
   },
 
-  /*
-  ** Build configuration
-  */
   build: {},
 }
