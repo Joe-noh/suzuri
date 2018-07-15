@@ -3,7 +3,8 @@
     <s-heading class="s-feature-list__heading">特集</s-heading>
 
     <div class="s-feature-list__choices">
-      <s-choice class="s-feature-list__choices__choice" :choice="choice" v-for="choice in choices"/>
+      <s-choice class="s-feature-list__choices__choice" :choice="choice"
+        v-for="choice in choices" :key="choice.id"/>
     </div>
   </div>
 </template>
