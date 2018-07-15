@@ -34,6 +34,10 @@ module.exports = {
     '@nuxtjs/font-awesome',
     '@nuxtjs/pwa',
   ],
+  
+  serverMiddleware: [
+    '~server/middleware/cache-control.js',
+  ],
 
   axios: {},
 
