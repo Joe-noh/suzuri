@@ -45,6 +45,9 @@ export default {
       return item.humanizeName
     },
   },
+  async mounted() {
+    this.product = await fetchProduct(this.itemId)
+  }
 }
 </script>
 
