@@ -3,8 +3,31 @@
     <h1 class="s-global-header__logo">
       <a class="s-global-header__logo__link" href="/">LOGO</a>
     </h1>
+    <a :href="oauthUrl">Login</a>
   </header>
 </template>
+
+<script>
+export default {
+  computed: {
+    oauthUrl() {
+      const clientId = process.env.SUZURI_CLIENT_ID
+      const redirectUri = encodeURIComponent(process.env.SUZURI_REDIRECT_URI)
+      const scope = "read write"
+      const responseType = "code"
+      
+      const query = [
+        `client_id=${clientId}`,
+        `redirect_uri=${redirectUri}`,
+        `scope=${scope}`,
+        `response_type=${responseType}`,
+      ].join('&')
+
+      return `https://suzuri.jp/oauth/authorize?${query}`
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import '~assets/stylesheets/mixins/variables';
