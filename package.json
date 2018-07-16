@@ -5,7 +5,9 @@
   "author": "Joe-noh",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "dev": "run-p dev:*",
+    "dev:app": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "dev:proxy": "node server/dev-proxy.js",
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production node server/index.js",
     "generate": "nuxt generate",
@@ -20,6 +22,7 @@
     "@nuxtjs/router": "^1.0.1",
     "express": "^4.15.3",
     "express-http-proxy": "^1.2.0",
+    "http-proxy": "^1.17.0",
     "nuxt": "^1.0.0"
   },
   "devDependencies": {
@@ -27,6 +30,7 @@
     "cross-env": "^5.0.1",
     "node-sass": "^4.9.1",
     "nodemon": "^1.11.0",
+    "npm-run-all": "^4.1.3",
     "prettier": "^1.13.7",
     "sass-loader": "^7.0.3"
   }
