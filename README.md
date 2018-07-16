@@ -1,6 +1,4 @@
-# suzuri
-
-> Kage-bunshin no Jitsu
+# SUZURI Lite
 
 ## Build Setup
 
