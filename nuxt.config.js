@@ -53,7 +53,12 @@ module.exports = {
         urlPattern: 'https://d1q9av5b648rmv.cloudfront.net/.*',
         handler: 'cacheFirst',
         method: 'GET',
-      }
+      },
+      {
+        urlPattern: 'https://dzdih2euft5nz.cloudfront.net/.*',
+        handler: 'cacheFirst',
+        method: 'GET',
+      },
     ],
   },
 
