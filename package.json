@@ -1,7 +1,7 @@
 {
-  "name": "suzuri",
+  "name": "suzuri-lite",
   "version": "1.0.0",
-  "description": "Kage-bunshin no Jitsu",
+  "description": "Experimental project that imitate suzuri using public API",
   "author": "Joe-noh",
   "private": true,
   "scripts": {
