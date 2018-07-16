@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { fetchAccessToken, loginAsSuzuriUser } from '~/lib/suzuri'
+import { loginAsSuzuriUser } from '~/lib/suzuri'
 
 export default {
   props: {
@@ -15,8 +15,9 @@ export default {
     },
   },
   async mounted() {
-    const accessToken = await fetchAccessToken(this.code)
-    const user = await loginAsSuzuriUser(accessToken)
+    const user = await loginAsSuzuriUser(this.code)
+
+    // store user info into localStorage
   },
 }
 </script>
