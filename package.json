@@ -20,6 +20,7 @@
     "@nuxtjs/font-awesome": "^1.0.3",
     "@nuxtjs/pwa": "^2.0.8",
     "@nuxtjs/router": "^1.0.1",
+    "body-parser": "^1.18.3",
     "express": "^4.15.3",
     "express-http-proxy": "^1.2.0",
     "http-proxy": "^1.17.0",
