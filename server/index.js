@@ -30,6 +30,7 @@ async function start() {
         proxyReqOpts.headers['Authorization'] = `Bearer ${process.env.SUZURI_API_KEY}`
         return proxyReqOpts
       },
+      filter: (req, res) => (req.method === 'GET'),
     }),
   )
 
