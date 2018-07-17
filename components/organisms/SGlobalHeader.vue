@@ -3,7 +3,9 @@
     <h1 class="s-global-header__logo">
       <a class="s-global-header__logo__link" href="/">LOGO</a>
     </h1>
-    <a :href="oauthUrl">Login</a>
+    <div class="s-global-header__auth">
+      <a class="s-global-header__auth__login" :href="oauthUrl">LOGIN</a>
+    </div>
   </header>
 </template>
 
@@ -35,8 +37,9 @@ export default {
 
 .s-global-header {
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
   height: 52px;
   width: 100%;
   background-color: $white;
@@ -51,6 +54,14 @@ export default {
 }
 
 .s-global-header__logo__link {
+  @include link-color($black);
+}
+
+.s-global-header__auth {
+  margin-right: 10px;
+}
+
+.s-global-header__auth__login {
   @include link-color($black);
 }
 </style>

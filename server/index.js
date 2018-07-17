@@ -2,7 +2,6 @@ const express = require('express')
 const proxy = require('express-http-proxy')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
-const bodyParser = require('body-parser')
 const authRoute = require('./routes/auth')
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3001
@@ -21,7 +20,6 @@ async function start() {
     await builder.build()
   }
 
-  app.use(bodyParser.json())
   app.use('/auth', authRoute)
 
   app.use(
