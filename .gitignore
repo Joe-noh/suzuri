@@ -15,3 +15,5 @@ dist
 
 .env
 sw.*
+
+server/cert/*.pem
