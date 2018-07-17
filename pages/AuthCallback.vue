@@ -17,6 +17,7 @@ export default {
   async mounted() {
     const user = await loginAsSuzuriUser(this.code)
 
+    console.log(user)
     // store user info into localStorage
   },
 }
