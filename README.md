@@ -7,7 +7,7 @@
 $ npm install
 
 # serve with hot reload at localhost:3000
-$ npm run dev
+$ NODE_TLS_REJECT_UNAUTHORIZED=0 npm run dev
 
 # build for production and launch server
 $ npm run build

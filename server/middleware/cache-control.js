@@ -1,16 +1,16 @@
 module.exports = function(req, res, next) {
-  const maxAge = calcMaxAge(req.path)
-
-  res.set('Cache-Control', `max-age=${maxAge}`)
+  res.set('Cache-Control', cacheControl(req))
 
   next()
 }
 
-function calcMaxAge(path) {
-  switch(path) {
+function cacheControl(req) {
+  switch(req.path) {
     case '/':
-      return 3600 * 3
+      return `max-age=${3600 * 3}`
+    case '/auth/callback':
+      return 'no-cache, no-store, must-revalidate'
     default:
-      return 3600 * 24 * 365
+      return `max-age=${3600 * 24 * 365}`
   }
 }
