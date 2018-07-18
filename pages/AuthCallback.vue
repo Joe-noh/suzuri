@@ -1,7 +1,5 @@
 <template>
-  <div class="a">
-    callback
-  </div>
+  <p>{{ message }}</p>
 </template>
 
 <script>
@@ -14,11 +12,20 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      message: "",
+    }
+  },
   async mounted() {
-    const user = await loginAsSuzuriUser(this.code)
+    try {
+      const user = await loginAsSuzuriUser(this.code)
 
-    console.log(user)
-    // store user info into localStorage
+      localStorage.setItem("currentUser", JSON.stringify(user))
+      location.href = "/"
+    } catch(e) {
+      this.message = e.message
+    }
   },
 }
 </script>

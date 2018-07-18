@@ -10,5 +10,6 @@ httpProxy.createServer({
   target: {
     host: 'localhost',
     port: 3001
-  }
+  },
+  secure: false,
 }).listen(3000)
