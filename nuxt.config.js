@@ -16,11 +16,6 @@ module.exports = {
 
   loading: false,
 
-  env: {
-    SUZURI_API_KEY: process.env.SUZURI_API_KEY,
-    BASE_URL: process.env.BASE_URL,
-  },
-
   css: [],
 
   plugins: [
@@ -29,14 +24,9 @@ module.exports = {
 
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/dotenv',
     '@nuxtjs/router',
     '@nuxtjs/font-awesome',
     '@nuxtjs/pwa',
-  ],
-  
-  serverMiddleware: [
-    '~server/middleware/cache-control.js',
   ],
 
   axios: {},

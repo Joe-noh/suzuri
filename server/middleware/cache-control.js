@@ -5,12 +5,21 @@ module.exports = function(req, res, next) {
 }
 
 function cacheControl(req) {
-  switch(req.path) {
-    case '/':
-      return `max-age=${3600 * 3}`
-    case '/auth/callback':
-      return 'no-cache, no-store, must-revalidate'
-    default:
-      return `max-age=${3600 * 24 * 365}`
+  const path = req.path
+
+  if (path === "/") {
+    return `max-age=${3600 * 3}`
+  } else if(noCache(path)) {
+    return 'no-cache, no-store, must-revalidate'
+  } else {
+    return `max-age=${3600 * 24 * 365}`
   }
+}
+
+function noCache(path) {
+  return (
+    path.startsWith("/api") ||
+    path.startsWith("/auth") ||
+    path.startsWith("/_nuxt")
+  )
 }

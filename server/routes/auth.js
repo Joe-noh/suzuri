@@ -2,28 +2,46 @@ const {Router} = require('express')
 const bodyParser = require('body-parser')
 const axios = require('axios')
 
+const { User } = require('../models')
+
 const router = Router()
 
 router.use(bodyParser.json())
 
-router.post('/login', async (req, res, next) => {
-  const code = req.body.code
-  
-  const params = new URLSearchParams();
-  params.append('grant_type', 'authorization_code')
-  params.append('code', code)
-  params.append('redirect_uri', process.env.SUZURI_REDIRECT_URI)
-  params.append('client_id', process.env.SUZURI_CLIENT_ID)
-  params.append('client_secret', process.env.SUZURI_CLIENT_SECRET)
+router.get('/callback', async (req, res, next) => {
+  const code = req.query.code
 
   try {
-    const response = await axios.post('https://suzuri.jp/oauth/token', params)
-    const accessToken = response.data.access_token
-    
-    res.json({ user: { token: accessToken } })
+    const token = await User.exchangeTokenWithCode(code)
+    const user = await User.registerOrLogin(token)
+
+    req.session.regenerate(() => {
+      req.session.userId = user.id
+      res.redirect("/")
+    })
   } catch (e) {
-    console.log(e)
+    console.log(e);
     res.status(401).json({ error: e.response.data })
+  }
+})
+
+router.get('/user', async (req, res, next) => {
+  const userId = req.session.userId
+  try {
+    const user = await User.findById(userId)
+
+    if (user) {
+      res.json({
+        user: {
+          name: user.name,
+          avatarUrl: user.avatarUrl,
+        }
+      })
+    } else {
+      res.status(404).json({})
+    }
+  } catch (e) {
+    console.log(e);
   }
 })
 

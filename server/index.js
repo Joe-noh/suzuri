@@ -1,8 +1,16 @@
+require('dotenv').load()
+
 const express = require('express')
+const session = require('express-session')
+const RedisStore = require('connect-redis')(session)
 const proxy = require('express-http-proxy')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
+
+const cacheControl = require('./middleware/cache-control')
 const authRoute = require('./routes/auth')
+const apiRoute = require('./routes/api')
+
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3001
 
@@ -20,20 +28,26 @@ async function start() {
     await builder.build()
   }
 
-  app.use('/auth', authRoute)
+  app.use(cacheControl)
 
-  app.use(
-    '/api',
-    proxy('suzuri.jp', {
-      https: true,
-      proxyReqPathResolver: req => `/api${req.url}`,
-      proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
-        proxyReqOpts.headers['Authorization'] = `Bearer ${process.env.SUZURI_API_KEY}`
-        return proxyReqOpts
-      },
-      filter: (req, res) => (req.method === 'GET'),
+  app.set('trust proxy', 1)
+  app.use(session({
+    name: "sid",
+    secret: process.env.SECRET_KEY_BASE,
+    store: new RedisStore({
+      url: process.env.REDIS_URL,
     }),
-  )
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      path: "/",
+      secure: !config.dev,
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+    },
+  }))
+
+  app.use('/auth', authRoute)
+  app.use('/api', apiRoute)
 
   app.use(nuxt.render)
 

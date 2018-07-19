@@ -4,20 +4,30 @@
       <a class="s-global-header__logo__link" href="/">LOGO</a>
     </h1>
     <div class="s-global-header__auth">
-      <a class="s-global-header__auth__login" :href="oauthUrl">LOGIN</a>
+      <template v-if="user">
+        <img class="s-global-header__auth__avatar" :src="user.avatarUrl" :alt="user.name">
+      </template>
+      <template v-else>
+        <a class="s-global-header__auth__login" :href="oauthUrl">LOGIN</a>
+      </template>
     </div>
   </header>
 </template>
 
 <script>
 export default {
+  props: {
+    user: {
+      required: false,
+    },
+  },
   computed: {
     oauthUrl() {
       const clientId = process.env.SUZURI_CLIENT_ID
       const redirectUri = encodeURIComponent(process.env.SUZURI_REDIRECT_URI)
       const scope = "read write"
       const responseType = "code"
-      
+
       const query = [
         `client_id=${clientId}`,
         `redirect_uri=${redirectUri}`,
@@ -63,5 +73,11 @@ export default {
 
 .s-global-header__auth__login {
   @include link-color($black);
+}
+
+.s-global-header__auth__avatar {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
 }
 </style>
