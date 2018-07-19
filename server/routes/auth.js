@@ -8,8 +8,8 @@ const router = Router()
 
 router.use(bodyParser.json())
 
-router.post('/login', async (req, res, next) => {
-  const code = req.body.code
+router.get('/callback', async (req, res, next) => {
+  const code = req.query.code
 
   try {
     const token = await User.exchangeTokenWithCode(code)

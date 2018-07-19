@@ -4,7 +4,9 @@ const express = require('express')
 const proxy = require('express-http-proxy')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
+
 const authRoute = require('./routes/auth')
+
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3001
 
