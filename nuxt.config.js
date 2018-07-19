@@ -16,11 +16,6 @@ module.exports = {
 
   loading: false,
 
-  env: {
-    SUZURI_API_KEY: process.env.SUZURI_API_KEY,
-    BASE_URL: process.env.BASE_URL,
-  },
-
   css: [],
 
   plugins: [

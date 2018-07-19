@@ -8,7 +8,7 @@ router.use(bodyParser.json())
 
 router.post('/login', async (req, res, next) => {
   const code = req.body.code
-
+  
   const params = new URLSearchParams()
   params.append('grant_type', 'authorization_code')
   params.append('code', code)
@@ -19,10 +19,9 @@ router.post('/login', async (req, res, next) => {
   try {
     const response = await axios.post('https://suzuri.jp/oauth/token', params)
     const accessToken = response.data.access_token
-
+    
     res.json({ user: { token: accessToken } })
   } catch (e) {
-    console.log(e)
     res.status(401).json({ error: e.response.data })
   }
 })

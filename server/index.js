@@ -1,3 +1,5 @@
+require('dotenv').load()
+
 const express = require('express')
 const proxy = require('express-http-proxy')
 const { Nuxt, Builder } = require('nuxt')
