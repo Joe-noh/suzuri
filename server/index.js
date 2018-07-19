@@ -9,6 +9,7 @@ const app = express()
 
 const cacheControl = require('./middleware/cache-control')
 const authRoute = require('./routes/auth')
+const apiRoute = require('./routes/api')
 
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3001
@@ -46,19 +47,7 @@ async function start() {
   }))
 
   app.use('/auth', authRoute)
-
-  app.use(
-    '/api',
-    proxy('suzuri.jp', {
-      https: true,
-      proxyReqPathResolver: req => `/api${req.url}`,
-      proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
-        proxyReqOpts.headers['Authorization'] = `Bearer ${process.env.SUZURI_API_KEY}`
-        return proxyReqOpts
-      },
-      filter: (req, res) => (req.method === 'GET'),
-    }),
-  )
+  app.use('/api', apiRoute)
 
   app.use(nuxt.render)
 
