@@ -15,9 +15,9 @@ router.get('/callback', async (req, res, next) => {
     const token = await User.exchangeTokenWithCode(code)
     const user = await User.registerOrLogin(token)
 
-    return res.json({
-      name: user.name,
-      avatarUrl: user.avatarUrl,
+    req.session.regenerate(() => {
+      req.session.userId = user.id
+      return res.redirect("/")
     })
   } catch (e) {
     console.log(e);

@@ -29,10 +29,6 @@ module.exports = {
     '@nuxtjs/pwa',
   ],
 
-  serverMiddleware: [
-    '~server/middleware/cache-control.js',
-  ],
-
   axios: {},
 
   manifest: {

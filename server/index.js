@@ -1,10 +1,12 @@
 require('dotenv').load()
 
 const express = require('express')
+const session = require('express-session')
 const proxy = require('express-http-proxy')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
 
+const cacheControl = require('./middleware/cache-control')
 const authRoute = require('./routes/auth')
 
 const host = process.env.HOST || '127.0.0.1'
@@ -23,6 +25,21 @@ async function start() {
     const builder = new Builder(nuxt)
     await builder.build()
   }
+
+  app.use(cacheControl)
+
+  app.set('trust proxy', 1)
+  app.use(session({
+    name: "sid",
+    secret: process.env.SECRET_KEY_BASE,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      path: "/",
+      secure: !config.dev,
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+    },
+  }))
 
   app.use('/auth', authRoute)
 
