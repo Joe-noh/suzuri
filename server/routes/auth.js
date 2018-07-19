@@ -17,7 +17,7 @@ router.get('/callback', async (req, res, next) => {
 
     req.session.regenerate(() => {
       req.session.userId = user.id
-      return res.redirect("/")
+      res.redirect("/")
     })
   } catch (e) {
     console.log(e);
