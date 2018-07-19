@@ -30,7 +30,7 @@ async function start() {
 
   app.use(cacheControl)
 
-  app.set('trust proxy', 1)
+  app.set('trust proxy', true)
   app.use(session({
     name: "sid",
     secret: process.env.SECRET_KEY_BASE,
@@ -39,9 +39,10 @@ async function start() {
     }),
     resave: false,
     saveUninitialized: true,
+    proxy: true,
     cookie: {
       path: "/",
-      secure: !config.dev,
+      secure: false,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     },
   }))
