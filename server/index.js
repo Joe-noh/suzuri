@@ -39,6 +39,7 @@ async function start() {
     }),
     resave: false,
     saveUninitialized: true,
+    proxy: true,
     cookie: {
       path: "/",
       secure: !config.dev,
