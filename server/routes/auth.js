@@ -25,4 +25,24 @@ router.get('/callback', async (req, res, next) => {
   }
 })
 
+router.get('/user', async (req, res, next) => {
+  const userId = req.session.userId
+  try {
+    const user = await User.findById(userId)
+
+    if (user) {
+      res.json({
+        user: {
+          name: user.name,
+          avatarUrl: user.avatarUrl,
+        }
+      })
+    } else {
+      res.status(404).json({})
+    }
+  } catch (e) {
+    console.log(e);
+  }
+})
+
 module.exports = router

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <s-global-header/>
+    <s-global-header :user="user"/>
     <s-global-navigator/>
     <nuxt/>
   </div>
@@ -10,11 +10,21 @@
 import SGlobalHeader from '~/components/organisms/SGlobalHeader.vue'
 import SGlobalNavigator from '~/components/organisms/SGlobalNavigator.vue'
 
+import { fetchCurrentUser } from '~/lib/suzuri'
+
 export default {
   components: {
     SGlobalHeader,
     SGlobalNavigator,
   },
+  data() {
+    return {
+      user: null,
+    }
+  },
+  async mounted() {
+    this.user = await fetchCurrentUser()
+  }
 }
 </script>
 
