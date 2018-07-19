@@ -2,6 +2,7 @@ require('dotenv').load()
 
 const express = require('express')
 const session = require('express-session')
+const RedisStore = require('connect-redis')(session)
 const proxy = require('express-http-proxy')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
@@ -32,8 +33,11 @@ async function start() {
   app.use(session({
     name: "sid",
     secret: process.env.SECRET_KEY_BASE,
+    store: new RedisStore({
+      url: process.env.REDIS_URL,
+    }),
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
       path: "/",
       secure: !config.dev,
