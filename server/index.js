@@ -42,7 +42,7 @@ async function start() {
     proxy: true,
     cookie: {
       path: "/",
-      secure: !config.dev,
+      secure: false,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     },
   }))
