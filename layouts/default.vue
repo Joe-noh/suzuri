@@ -23,7 +23,19 @@ export default {
     }
   },
   async mounted() {
-    this.user = await fetchCurrentUser()
+    const currentUser = localStorage.getItem("currentUser")
+    console.log(currentUser)
+
+    if (currentUser) {
+      this.user = JSON.parse(currentUser)
+    } else {
+      try {
+        this.user = await fetchCurrentUser()
+        localStorage.setItem("currentUser", JSON.stringify(this.user))
+      } catch(e) {
+        // do nothing
+      }
+    }
   }
 }
 </script>
