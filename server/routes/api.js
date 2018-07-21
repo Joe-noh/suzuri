@@ -12,6 +12,11 @@ const router = proxy('suzuri.jp', {
     proxyReqOpts.headers['Authorization'] = `Bearer ${token}`
     return proxyReqOpts
   },
+  userResHeaderDecorator(headers) {
+    return Object.assign(headers, {
+      'Cache-Control': 'max-age=0, no-store, must-revalidate',
+    })
+  },
   filter: (req, res) => (req.method === 'GET'),
 })
 

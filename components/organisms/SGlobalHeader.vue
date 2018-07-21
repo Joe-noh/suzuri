@@ -5,7 +5,15 @@
     </h1>
     <div class="s-global-header__auth">
       <template v-if="user">
-        <img class="s-global-header__auth__avatar" :src="user.avatarUrl" :alt="user.name">
+        <img class="s-global-header__auth__avatar" @click="toggleMenu" :src="user.avatarUrl" :alt="user.name">
+        <div v-if="isMenuShown">
+          <ul class="s-global-header__auth__menu">
+            <li class="s-global-header__auth__menu__item" @click="logout">
+              <a class="s-global-header__auth__menu__item-link" href="#">Logout</a>
+            </li>
+          </ul>
+          <div class="s-global-header__auth__backdrop" @click="toggleMenu"/>
+        </div>
       </template>
       <template v-else>
         <a class="s-global-header__auth__login" :href="oauthUrl">LOGIN</a>
@@ -20,6 +28,11 @@ export default {
     user: {
       required: false,
     },
+  },
+  data() {
+    return {
+      isMenuShown: false,
+    }
   },
   computed: {
     oauthUrl() {
@@ -36,6 +49,15 @@ export default {
       ].join('&')
 
       return `https://suzuri.jp/oauth/authorize?${query}`
+    }
+  },
+  methods: {
+    toggleMenu() {
+      this.isMenuShown = !this.isMenuShown
+    },
+    logout() {
+      localStorage.removeItem("currentUser")
+      location.href = "/auth/logout"
     }
   }
 }
@@ -79,5 +101,45 @@ export default {
   height: 32px;
   width: 32px;
   border-radius: 50%;
+}
+
+.s-global-header__auth__menu {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 48px;
+  right: 10px;
+  z-index: 100;
+  list-style: none;
+  min-width: 100px;
+  background-color: $white;
+  box-shadow: 0 0 4px rgba($black, .5);
+}
+
+.s-global-header__auth__menu__item {
+  width: 100%;
+  height: 32px;
+  line-height: 32px;
+}
+
+.s-global-header__auth__menu__item-link {
+  @include link-color($black);
+
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+  background-color: $white;
+}
+
+.s-global-header__auth__backdrop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
 }
 </style>

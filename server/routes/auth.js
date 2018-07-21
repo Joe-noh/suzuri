@@ -9,6 +9,8 @@ const router = Router()
 router.use(bodyParser.json())
 
 router.get('/callback', async (req, res, next) => {
+  res.set('Cache-Control', 'max-age=0, no-store, must-revalidate')
+
   const code = req.query.code
 
   try {
@@ -26,7 +28,10 @@ router.get('/callback', async (req, res, next) => {
 })
 
 router.get('/user', async (req, res, next) => {
+  res.set('Cache-Control', 'max-age=0, no-store, must-revalidate')
+
   const userId = req.session.userId
+
   try {
     const user = await User.findById(userId)
 
@@ -43,6 +48,14 @@ router.get('/user', async (req, res, next) => {
   } catch (e) {
     console.log(e);
   }
+})
+
+router.get('/logout', (req, res, next) => {
+  res.set('Cache-Control', 'max-age=0, no-store, must-revalidate')
+
+  req.session.destroy(() => {
+    res.redirect("/")
+  })
 })
 
 module.exports = router
