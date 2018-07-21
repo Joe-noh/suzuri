@@ -1,5 +1,7 @@
 module.exports = function(req, res, next) {
-  res.set('Cache-Control', cacheControl(req))
+  if (process.env.NODE_ENV === "production") {
+    res.set('Cache-Control', cacheControl(req))
+  }
 
   next()
 }
