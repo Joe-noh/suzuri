@@ -1,16 +1,20 @@
 <template lang="html">
-  <!-- <s-user-profile :user="user"/> -->
-  <s-product-list :products="products"/>
+  <div>
+    <s-user-profile :user="user"/>
+    <s-product-list :products="products"/>
+  </div>
 </template>
 
 <script>
 import SProductList from '~/components/molecules/SProductList.vue'
+import SUserProfile from '~/components/organisms/SUserProfile.vue'
 
 import { fetchUserProducts, fetchUser } from '~/lib/suzuri'
 
 export default {
   components: {
     SProductList,
+    SUserProfile,
   },
   props: {
     userName: {
