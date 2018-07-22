@@ -7,7 +7,7 @@
       <span>{{ product.material.title }}</span>
     </a>
     <span class="product__price">&yen;{{ product.sampleItemVariant.price + product.material.price | comma }}</span>
-    <a class="product__user" :href="userShopUrl(product.sampleUrl)">
+    <a class="product__user" :href="userShopUrl">
       <img class="product__user__avatar" :src="product.material.user.avatarUrl">
       <span class="product__user__name">{{ product.material.user.name }}</span>
     </a>
@@ -27,19 +27,19 @@ export default {
       return [
         '',
         this.product.material.user.name,
+        this.product.material.user.id,
         this.product.id,
         this.product.item.name,
         this.product.sampleItemVariant.size.name,
         this.product.sampleItemVariant.color.name,
       ].join('/')
-    }
-  },
-  methods: {
-    userShopUrl(sampleUrl) {
-      const regexp = new RegExp('(https://suzuri.jp/.+?)/')
-      const match = sampleUrl.match(regexp)
-
-      return match[0]
+    },
+    userShopUrl() {
+      return [
+        '',
+        this.product.material.user.name,
+        this.product.material.user.id,
+      ].join('/')
     }
   }
 }
