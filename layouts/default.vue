@@ -24,7 +24,6 @@ export default {
   },
   async mounted() {
     const currentUser = localStorage.getItem("currentUser")
-    console.log(currentUser)
 
     if (currentUser) {
       this.user = JSON.parse(currentUser)
