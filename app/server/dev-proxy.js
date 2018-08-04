@@ -1,6 +1,6 @@
-const fs = require('fs')
-const path = require('path')
-const httpProxy = require('http-proxy')
+import fs  from 'fs';
+import path  from 'path';
+import httpProxy  from 'http-proxy';
 
 httpProxy.createServer({
   ssl: {
@@ -12,4 +12,4 @@ httpProxy.createServer({
     port: 3001
   },
   secure: false,
-}).listen(3000)
+}).listen(3000);
