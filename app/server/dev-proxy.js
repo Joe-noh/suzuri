@@ -1,6 +1,6 @@
-import fs  from 'fs';
-import path  from 'path';
-import httpProxy  from 'http-proxy';
+const fs = require('fs');
+const path = require('path');
+const httpProxy = require('http-proxy');
 
 httpProxy.createServer({
   ssl: {
