@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const config = require('sapper/webpack/config.js');
+const preprocessor = require('svelte-preprocess');
+const preprocessOptions = require('./preprocess.js');
 const pkg = require('../package.json');
 
 module.exports = {
@@ -22,7 +24,8 @@ module.exports = {
           loader: 'svelte-loader',
           options: {
             css: false,
-            generate: 'ssr'
+            generate: 'ssr',
+            preprocess: preprocessor(),
           }
         }
       }
