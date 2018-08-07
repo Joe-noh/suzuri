@@ -21,31 +21,24 @@
 
 <script>
 export default {
-  props: {
-    user: {
-      required: false,
-    },
-  },
   data() {
+    const clientId = process.env.SUZURI_CLIENT_ID
+    const redirectUri = encodeURIComponent(process.env.SUZURI_REDIRECT_URI)
+    const scope = "read write"
+    const responseType = "code"
+
+    const query = [
+      `client_id=${clientId}`,
+      `redirect_uri=${redirectUri}`,
+      `scope=${scope}`,
+      `response_type=${responseType}`,
+    ].join('&')
+
+    const oauthUrl = `https://suzuri.jp/oauth/authorize?${query}`
+
     return {
       isMenuShown: false,
-    }
-  },
-  computed: {
-    oauthUrl() {
-      const clientId = process.env.SUZURI_CLIENT_ID
-      const redirectUri = encodeURIComponent(process.env.SUZURI_REDIRECT_URI)
-      const scope = "read write"
-      const responseType = "code"
-
-      const query = [
-        `client_id=${clientId}`,
-        `redirect_uri=${redirectUri}`,
-        `scope=${scope}`,
-        `response_type=${responseType}`,
-      ].join('&')
-
-      return `https://suzuri.jp/oauth/authorize?${query}`
+      oauthUrl,
     }
   },
   methods: {
@@ -60,9 +53,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import '~assets/stylesheets/mixins/variables';
-@import '~assets/stylesheets/mixins/fonts';
+<style lang="sass">
+@import './style/mixins/variables';
+@import './style/mixins/fonts';
 
 .global-header {
   display: flex;
