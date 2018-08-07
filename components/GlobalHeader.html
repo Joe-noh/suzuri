@@ -1,0 +1,142 @@
+<header class="global-header">
+  <h1 class="global-header__logo">
+    <a class="global-header__logo__link" href="/">LOGO</a>
+  </h1>
+  <div class="global-header__auth">
+    {#if user}
+      <img class="global-header__auth__avatar" on:click="toggleMenu()" src="{user.avatarUrl}" alt="{user.name}">
+      {#if user.loggedIn}
+        <ul class="global-header__auth__menu">
+          <li class="global-header__auth__menu__item" on:click="logout()">
+            <a class="global-header__auth__menu__item-link" href="#">Logout</a>
+          </li>
+        </ul>
+        <div class="global-header__auth__backdrop" on:click="toggleMenu()" />
+      {/if}
+    {:else}
+      <a class="global-header__auth__login" href="{oauthUrl}">LOGIN</a>
+    {/if}
+  </div>
+</header>
+
+<script>
+export default {
+  props: {
+    user: {
+      required: false,
+    },
+  },
+  data() {
+    return {
+      isMenuShown: false,
+    }
+  },
+  computed: {
+    oauthUrl() {
+      const clientId = process.env.SUZURI_CLIENT_ID
+      const redirectUri = encodeURIComponent(process.env.SUZURI_REDIRECT_URI)
+      const scope = "read write"
+      const responseType = "code"
+
+      const query = [
+        `client_id=${clientId}`,
+        `redirect_uri=${redirectUri}`,
+        `scope=${scope}`,
+        `response_type=${responseType}`,
+      ].join('&')
+
+      return `https://suzuri.jp/oauth/authorize?${query}`
+    }
+  },
+  methods: {
+    toggleMenu() {
+      this.isMenuShown = !this.isMenuShown
+    },
+    logout() {
+      localStorage.removeItem("currentUser")
+      location.href = "/auth/logout"
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '~assets/stylesheets/mixins/variables';
+@import '~assets/stylesheets/mixins/fonts';
+
+.global-header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 52px;
+  width: 100%;
+  background-color: $white;
+  border-bottom: solid 1px $graylight;
+}
+
+.global-header__logo {
+  @include font-size(huge);
+
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.global-header__logo__link {
+  @include link-color($black);
+}
+
+.global-header__auth {
+  margin-right: 10px;
+}
+
+.global-header__auth__login {
+  @include link-color($black);
+}
+
+.global-header__auth__avatar {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+}
+
+.global-header__auth__menu {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 48px;
+  right: 10px;
+  z-index: 100;
+  list-style: none;
+  min-width: 100px;
+  background-color: $white;
+  box-shadow: 0 0 4px rgba($black, .5);
+}
+
+.global-header__auth__menu__item {
+  width: 100%;
+  height: 32px;
+  line-height: 32px;
+}
+
+.global-header__auth__menu__item-link {
+  @include link-color($black);
+
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+  background-color: $white;
+}
+
+.global-header__auth__backdrop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+}
+</style>
