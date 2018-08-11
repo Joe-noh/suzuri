@@ -1,8 +1,11 @@
 <div class="">
-  <div class="list-wrapper">
+  <div class="wrapper">
+    <FeatureList choices="{features}" />
+  </div>
+  <div class="wrapper">
     <TitledProductList products="{pickups}" title="ピックアップ"></TitledProductList>
   </div>
-  <div class="list-wrapper">
+  <div class="wrapper">
     <TitledProductList products="{products}" title="新着"></TitledProductList>
   </div>
 </div>
@@ -10,24 +13,27 @@
 <script>
   export default {
     components: {
+      FeatureList: 'components/organisms/FeatureList.html',
       TitledProductList: 'components/molecules/TitledProductList.html',
     },
     async preload(context) {
       const results = await Promise.all([
         this.fetch('api/v1/products').then(r => r.json()),
         this.fetch('api/v1/users/7/favorites').then(r => r.json()),
+        this.fetch('api/v1/choices?userName=surisurikun&limit=4').then(r => r.json()),
       ]);
 
       return {
         products: results[0].products,
         pickups: results[1].favorites.map(fav => fav.product),
+        features: results[2].choices,
       };
     }
   };
 </script>
 
 <style lang="sass">
-.list-wrapper {
-  margin-top: 20px;
+.wrapper {
+  padding-top: 20px;
 }
 </style>

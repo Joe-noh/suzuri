@@ -1,0 +1,46 @@
+<div class="feature-list">
+  <div class="feature-list__heading">
+    <Heading>特集</Heading>
+  </div>
+  <div class="feature-list__choices">
+    {#each choices as choice}
+      <div class="feature-list__choices__choice">
+        <Choice choice="{choice}" />
+      </div>
+    {/each}
+  </div>
+</div>
+
+<script>
+export default {
+  components: {
+    Heading: 'components/atoms/Heading.html',
+    Choice: 'components/molecules/Choice.html',
+  },
+  props: ['choices'],
+}
+</script>
+
+<style lang="sass">
+.feature-list {
+  padding: 0 10px;
+}
+
+.feature-list__heading {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.feature-list__choices {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  overflow-x: scroll;
+}
+
+.feature-list__choices__choice {
+  margin: 0 10px 0 0;
+  min-width: 300px;
+  height: 100px;
+}
+</style>
