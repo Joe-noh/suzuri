@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <TitledProductList products="{products}" title="{itemName}"></TitledProductList>
+</div>
+
+<script>
+  import {itemByName} from '../items';
+
+  export default {
+    components: {
+      TitledProductList: 'components/molecules/TitledProductList.html',
+    },
+    async preload(context) {
+      const item = itemByName(context.params.itemName)
+      const res = await this.fetch(`/api/v1/products?itemId=${item.id}`).then(r => r.json());
+
+      return {
+        itemName: item.humanizeName,
+        products: res.products,
+      };
+    },
+  };
+</script>
+
+<style lang="sass">
+.wrapper {
+  padding-top: 20px;
+}
+</style>

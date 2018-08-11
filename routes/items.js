@@ -1,4 +1,4 @@
-export default [
+export const items = [
   {id: 1, name: 't-shirt', humanizeName: 'Tシャツ'},
   {id: 19, name: 'ringer-t-shirt', humanizeName: 'リンガーTシャツ'},
   {id: 15, name: 'long-sleeve-t-shirt', humanizeName: 'ロングスリーブTシャツ'},
@@ -19,3 +19,7 @@ export default [
   {id: 6, name: 'baby-rompers', humanizeName: 'ベイビーロンパース'},
   {id: 7, name: 'baby-bib', humanizeName: 'ベイビービブ'},
 ]
+
+export function itemByName(name) {
+  return items.find(item => item.name === name);
+}
