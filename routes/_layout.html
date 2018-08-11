@@ -1,13 +1,20 @@
 <GlobalHeader />
+<GlobalNavigator items={items} />
 
 <main>
   <svelte:component this={child.component} {...child.props}/>
 </main>
 
 <script>
+  import items from './items'
+
   export default {
     components: {
-      GlobalHeader: 'components/organisms/GlobalHeader.html'
-    }
+      GlobalHeader: 'components/organisms/GlobalHeader.html',
+      GlobalNavigator: 'components/organisms/GlobalNavigator.html',
+    },
+    data() {
+      return { items };
+    },
   };
 </script>

@@ -1,0 +1,50 @@
+<nav class="global-navigator">
+  <ul class="global-navigator__list">
+    {#each items as item}
+      <li class="global-navigator__list-item">
+        <a class="global-navigator__list-item__link" href="{`/items/${item.name}`}">{item.humanizeName}</a>
+      </li>
+    {/each}
+  </ul>
+</nav>
+
+<script>
+export default {
+  props: ['items']
+}
+</script>
+
+<style lang="sass">
+@import 'components/style/mixins/variables';
+@import 'components/style/mixins/fonts';
+
+.global-navigator {
+  height: 40px;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  background-color: $white;
+  border-bottom: solid 1px $graylight;
+}
+
+.global-navigator__list {
+  list-style: none;
+  text-decoration: none;
+  display: flex;
+  flex-flow: row nowrap;
+  overflow-x: scroll;
+}
+
+.global-navigator__list-item {
+  line-height: 40px;
+  white-space: nowrap;
+  margin-right: 7px;
+}
+
+.global-navigator__list-item__link {
+  @include link-color($black);
+
+  font-weight: bold;
+  font-size: 14px;
+}
+</style>
