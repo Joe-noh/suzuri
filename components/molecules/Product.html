@@ -1,53 +1,51 @@
-<template>
-  <div class="product">
-    <a class="product__sample" :href="productUrl">
-      <img class="product__sample__image" :src="product.sampleImageUrl">
-    </a>
-    <a class="product__title" :href="productUrl">
-      <span>{{ product.material.title }}</span>
-    </a>
-    <span class="product__price">&yen;{{ product.sampleItemVariant.price + product.material.price | comma }}</span>
-    <a class="product__user" :href="userShopUrl">
-      <img class="product__user__avatar" :src="product.material.user.avatarUrl">
-      <span class="product__user__name">{{ product.material.user.name }}</span>
-    </a>
-  </div>
-</template>
+<div class="product">
+  <a class="product__sample" href="{productUrl}">
+    <img class="product__sample__image" src="{product.sampleImageUrl}">
+  </a>
+  <a class="product__title" href="{productUrl}">
+    <span>{product.material.title}</span>
+  </a>
+  <span class="product__price">&yen;{comma(product.sampleItemVariant.price + product.material.price)}</span>
+  <a class="product__user" href="{userShopUrl}">
+    <img class="product__user__avatar" src="{product.material.user.avatarUrl}">
+    <span class="product__user__name">{product.material.user.name}</span>
+  </a>
+</div>
 
 <script>
+import {comma} from 'components/helpers';
+
 export default {
-  props: {
-    product: {
-      type: Object,
-      required: true,
-    },
+  props: ['product'],
+  helpers: {
+    comma,
   },
   computed: {
-    productUrl() {
+    productUrl({product}) {
       return [
         '',
-        this.product.material.user.name,
-        this.product.material.user.id,
-        this.product.id,
-        this.product.item.name,
-        this.product.sampleItemVariant.size.name,
-        this.product.sampleItemVariant.color.name,
+        product.material.user.name,
+        product.material.user.id,
+        product.id,
+        product.item.name,
+        product.sampleItemVariant.size.name,
+        product.sampleItemVariant.color.name,
       ].join('/')
     },
-    userShopUrl() {
+    userShopUrl({product}) {
       return [
         '',
-        this.product.material.user.name,
-        this.product.material.user.id,
+        product.material.user.name,
+        product.material.user.id,
       ].join('/')
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-@import "~assets/stylesheets/mixins/fonts";
-@import "~assets/stylesheets/mixins/variables";
+<style lang="sass">
+@import "components/style/mixins/fonts";
+@import "components/style/mixins/variables";
 
 .product {
   width: calc(50% - 10px);

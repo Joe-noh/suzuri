@@ -1,0 +1,24 @@
+<div class="product-list">
+  {#each products as product}
+    <Product product="{product}"></Product>
+  {/each}
+</div>
+
+<script>
+export default {
+  components: {
+    Product: 'components/molecules/Product.html',
+  },
+  props: ['products'],
+}
+</script>
+
+<style lang="sass">
+.product-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 5px;
+}
+</style>

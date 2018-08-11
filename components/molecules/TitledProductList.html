@@ -1,0 +1,23 @@
+<div class="title-product-list">
+  <div class="heading">
+    <Heading>{title}</Heading>
+  </div>
+  <ProductList products="{products}"></ProductList>
+</div>
+
+<script>
+export default {
+  components: {
+    Heading: 'components/atoms/Heading.html',
+    ProductList: 'components/molecules/ProductList.html',
+  },
+  props: ['title', 'products'],
+}
+</script>
+
+<style lang="sass">
+.heading {
+  text-align: center;
+  margin-bottom: 10px;
+}
+</style>

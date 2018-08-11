@@ -1,18 +1,19 @@
 <div class="">
-  {#each products as product}
-    <li>{product.title}</li>
-  {/each}
+  <TitledProductList products="{products}" title="新着"></TitledProductList>
 </div>
 
 <script>
   export default {
+    components: {
+      TitledProductList: 'components/molecules/TitledProductList.html',
+    },
     async preload(context) {
       const res = await this.fetch(`api/v1/products/`);
       const json = await res.json();
 
       return {
         products: json.products
-       };
+      };
     }
   };
 </script>

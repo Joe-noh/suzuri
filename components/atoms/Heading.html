@@ -1,0 +1,12 @@
+<h2 class="heading"><slot/></h2>
+
+<style lang="sass">
+@import "components/style/mixins/variables";
+@import "components/style/mixins/fonts";
+
+.heading {
+  @include font-size(huge);
+
+  color: $black;
+}
+</style>
