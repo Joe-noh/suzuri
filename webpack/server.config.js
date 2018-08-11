@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const config = require('sapper/webpack/config.js');
 const preprocessor = require('svelte-preprocess');
-const preprocessOptions = require('./preprocess.js');
 const pkg = require('../package.json');
 
 module.exports = {
