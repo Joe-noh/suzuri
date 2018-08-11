@@ -1,5 +1,10 @@
 <div class="">
-  <TitledProductList products="{products}" title="新着"></TitledProductList>
+  <div class="list-wrapper">
+    <TitledProductList products="{pickups}" title="ピックアップ"></TitledProductList>
+  </div>
+  <div class="list-wrapper">
+    <TitledProductList products="{products}" title="新着"></TitledProductList>
+  </div>
 </div>
 
 <script>
@@ -8,12 +13,21 @@
       TitledProductList: 'components/molecules/TitledProductList.html',
     },
     async preload(context) {
-      const res = await this.fetch(`api/v1/products/`);
-      const json = await res.json();
+      const results = await Promise.all([
+        this.fetch('api/v1/products').then(r => r.json()),
+        this.fetch('api/v1/users/7/favorites').then(r => r.json()),
+      ]);
 
       return {
-        products: json.products
+        products: results[0].products,
+        pickups: results[1].favorites.map(fav => fav.product),
       };
     }
   };
 </script>
+
+<style lang="sass">
+.list-wrapper {
+  margin-top: 20px;
+}
+</style>
