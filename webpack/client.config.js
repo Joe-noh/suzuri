@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const config = require('sapper/webpack/config.js');
 const preprocessor = require('svelte-preprocess');
@@ -10,7 +11,10 @@ module.exports = {
   output: config.client.output(),
   resolve: {
     extensions: ['.js', '.json', '.html'],
-    mainFields: ['svelte', 'module', 'browser', 'main']
+    mainFields: ['svelte', 'module', 'browser', 'main'],
+    alias: {
+      components: path.resolve(__dirname, '../components'),
+    },
   },
   module: {
     rules: [
