@@ -1,13 +1,13 @@
 <div class="product">
   <a class="product__sample" href="{productUrl}">
-    <img class="product__sample__image" src="{product.sampleImageUrl}">
+    <img class="product__sample__image" src="{product.sampleImageUrl}" alt="{product.title}">
   </a>
   <a class="product__title" href="{productUrl}">
     <span>{product.material.title}</span>
   </a>
   <span class="product__price">&yen;{comma(product.sampleItemVariant.price + product.material.price)}</span>
   <a class="product__user" href="{userShopUrl}">
-    <img class="product__user__avatar" src="{product.material.user.avatarUrl}">
+    <img class="product__user__avatar" src="{product.material.user.avatarUrl}" alt="{product.material.user.name}">
     <span class="product__user__name">{product.material.user.name}</span>
   </a>
 </div>
