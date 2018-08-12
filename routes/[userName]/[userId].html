@@ -1,0 +1,22 @@
+<UserProfile user="{user}" />
+<ProductList products="{products}" />
+
+<script>
+  export default {
+    components: {
+      UserProfile: 'components/organisms/UserProfile.html',
+      ProductList: 'components/molecules/ProductList.html',
+    },
+    async preload({params}) {
+      const results = await Promise.all([
+        this.fetch(`/api/v1/products?userName=${params.userName}`).then(r => r.json()),
+        this.fetch(`/api/v1/users/${params.userId}`).then(r => r.json()),
+      ]);
+
+      return {
+        products: results[0].products,
+        user: results[1].user,
+      };
+    },
+  }
+</script>
