@@ -23,7 +23,7 @@
     "body-parser": "^1.18.3",
     "connect-redis": "^3.3.3",
     "dotenv": "^6.0.0",
-    "express": "^4.15.3",
+    "express": "^4.17.3",
     "express-http-proxy": "^1.2.0",
     "express-session": "^1.15.6",
     "http-proxy": "^1.18.1",
